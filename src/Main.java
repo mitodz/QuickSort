@@ -28,13 +28,14 @@ public class Main {
     }
 
     public void run() {
-        Scanner scanner = new Scanner("2 3\n" +
+        Scanner scanner = new Scanner("3 3\n" +
                 "0 5\n" +
+                "2 15\n" +
                 "7 10\n" +
                 "1 6 11");
         int n = scanner.nextInt(); // количество отрезков
         int m = scanner.nextInt(); // количество точек
-        int[] a = new int[n]; // массив координат отрезков
+        int[] a = new int[n * 2]; // массив координат отрезков
         for (int i = 0; i < n * 2; i++) {
             a[i] = scanner.nextInt();
         }
@@ -43,7 +44,7 @@ public class Main {
             p[j] = scanner.nextInt();
         }
         System.out.println(Arrays.toString(a));
-        quickSort(a,1,a.length);
+        quickSort(a,1,a.length-1);
         System.out.println(Arrays.toString(a));
     }
 
