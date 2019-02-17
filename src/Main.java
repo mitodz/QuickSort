@@ -7,7 +7,7 @@ public class Main {
         int x = a[l];
         int j = l;
         for (int i = l + 1; i < r; i++) {
-            if (a[i]<=x) {
+            if (a[i] <= x) {
                 j++;
                 int buf = a[i];
                 a[i] = a[j];
@@ -20,11 +20,11 @@ public class Main {
         return j;
     }
 
-    public void quickSort (int[] a, int l, int r) {
+    public void quickSort(int[] a, int l, int r) {
         if (l > r) return;
-        int m = partition(a,l,r);
-        quickSort(a,l,m-1);
-        quickSort(a,m+1,r);
+        int m = partition(a, l, r);
+        quickSort(a, l, m - 1);
+        quickSort(a, m + 1, r);
     }
 
     public void run() {
@@ -44,7 +44,7 @@ public class Main {
             p[j] = scanner.nextInt();
         }
         System.out.println(Arrays.toString(a));
-        quickSort(a,1,a.length-1);
+        quickSort(a, 1, a.length - 1);
         System.out.println(Arrays.toString(a));
     }
 
