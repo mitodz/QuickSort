@@ -21,10 +21,13 @@ public class Main {
     }
 
     public void quickSort(int[] a, int l, int r) {
-        if (l > r) return;
-        int m = partition(a, l, r);
-        quickSort(a, l, m - 1);
-        quickSort(a, m + 1, r);
+        //if (l > r) return;
+        while (l < r) {
+            int m = partition(a, l, r);
+            quickSort(a, l, m - 1);
+            l = m + 1; //хвостовая рекурсия
+            //quickSort(a, m + 1, r);
+        }
     }
 
     public void run() {
