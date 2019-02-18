@@ -6,7 +6,7 @@ public class Main {
     public int partition(int[] a, int l, int r) {
         int x = a[l];
         int j = l;
-        for (int i = l + 1; i < r; i++) {
+        for (int i = l + 1; i <= r; i++) {
             if (a[i] <= x) {
                 j++;
                 int buf = a[i];
@@ -29,8 +29,8 @@ public class Main {
 
     public void run() {
         Scanner scanner = new Scanner("3 3\n" +
-                "0 5\n" +
                 "2 15\n" +
+                "0 5\n" +
                 "7 10\n" +
                 "1 6 11");
         int n = scanner.nextInt(); // количество отрезков
@@ -44,7 +44,7 @@ public class Main {
             p[j] = scanner.nextInt();
         }
         System.out.println(Arrays.toString(a));
-        quickSort(a, 1, a.length - 1);
+        quickSort(a, 0, a.length - 1);
         System.out.println(Arrays.toString(a));
     }
 
