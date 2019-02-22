@@ -1,20 +1,25 @@
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     public int partition(int[] a, int l, int r) {
-        int x = a[l];
+        Random rnd = new Random();
+        int y = rnd.nextInt(r + 1 - l) + l;//случайный разделитель
+        int buf = a[l];
+        int x = a[l]=a[y];
+        a[y] = buf;
         int j = l;
         for (int i = l + 1; i <= r; i++) {
             if (a[i] <= x) {
                 j++;
-                int buf = a[i];
+                int buff = a[i];
                 a[i] = a[j];
-                a[j] = buf;
+                a[j] = buff;
             }
         }
-        int buf = a[j];
+        buf = a[j];
         a[j] = a[l];
         a[l] = buf;
         return j;
