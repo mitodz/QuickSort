@@ -12,11 +12,17 @@ public class Main {
         a[y] = buf;
         int j = l;
         for (int i = l + 1; i <= r; i++) {
-            if (a[i] <= x) {
+            if (a[i] < x) {
                 j++;
                 int buff = a[i];
                 a[i] = a[j];
                 a[j] = buff;
+            }
+            if (a[i] == x) {
+                int buff = a[i];
+                a[i] = a[j];
+                a[j] = buff;
+                j++;
             }
         }
         buf = a[j];
@@ -39,7 +45,7 @@ public class Main {
         Scanner scanner = new Scanner("3 3\n" +
                 "2 15\n" +
                 "0 5\n" +
-                "7 10\n" +
+                "5 5\n" +
                 "1 6 11");
         int n = scanner.nextInt(); // количество отрезков
         int m = scanner.nextInt(); // количество точек
