@@ -7,13 +7,13 @@ public class Main {
         int r = a.length; //фиктивная правая граница поиска нужного числа
         while (r > l + 1) {
             int m = l + ((r - l) >> 1); //номер индекса согласно алгоритма "разделяй и властвуй"
-            if (a[m] >= k) {
-                r = m;
-            } else {
+            if (a[m] < k) {
                 l = m;
+            } else {
+                r = m;
             }
         }
-        return r;
+        return l + 1;
     }
 
     public static int binarySearchLow(int[] a, int k) {
@@ -68,7 +68,21 @@ public class Main {
     }
 
     public void run() {
-        Scanner scanner = new Scanner(System.in); //Ответ 2 3 6 3 2 1
+        Scanner scanner = new Scanner("5 3\n" +
+                "0 5\n" +
+                "5 6\n" +
+                "3 6\n" +
+                "4 5\n" +
+                "3 6\n" +
+                "1 6 11"); //Ответ 1 3 0
+//        Scanner scanner = new Scanner("6 6\n" +
+//                "0 3\n" +
+//                "1 3\n" +
+//                "2 3\n" +
+//                "3 4\n" +
+//                "3 5\n" +
+//                "3 6\n" +
+//                "1 2 3 4 5 6"); //Ответ  2 3 6 3 2 1
         int n = scanner.nextInt(); // количество отрезков
         int m = scanner.nextInt(); // количество точек
         int[] a = new int[n]; // массив координат начала отрезков
