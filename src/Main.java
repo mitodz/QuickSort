@@ -1,14 +1,50 @@
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
+    public static int binarySearchHigh(int[] a, int k) {
+        int l = 1; //левая граница поиска нужного числа
+        int r = a.length; //правая граница поиска нужного числа
+        int m; //номер индекса согласно алгоритма "разделяй и властвуй"
+        while (l <= r) {
+            m = l + (r - l) / 2;
+            if (m < 1) m = 0;
+            if (a[m - 1] < k && m < a.length && a[m] > k) {
+                return m;
+            } else if (a[m - 1] > k) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+        return 0;
+    }
+
+    public static int binarySearchLow(int[] a, int k) {
+        int l = 1; //левая граница поиска нужного числа
+        int r = a.length; //правая граница поиска нужного числа
+        int m; //номер индекса согласно алгоритма "разделяй и властвуй"
+        while (l <= r) {
+            m = l + (r - l) / 2;
+            if (m < 1) m = 0;
+            if (a[m - 1] <= k && m < a.length && a[m] > k) {
+                return m;
+            } else if (a[m - 1] > k) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+        return 0;
+    }
+
+
     public int partition(int[] a, int l, int r) {
         Random rnd = new Random();
         int y = rnd.nextInt(r + 1 - l) + l;//случайный разделитель
         int buf = a[l];
-        int x = a[l]=a[y];
+        int x = a[l] = a[y];
         a[y] = buf;
         int j = l;
         for (int i = l + 1; i <= r; i++) {
@@ -42,30 +78,36 @@ public class Main {
     }
 
     public void run() {
-        Scanner scanner = new Scanner("3 3\n" +
-                "2 15\n" +
-                "0 5\n" +
-                "5 5\n" +
-                "1 6 11");
+        Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt(); // количество отрезков
         int m = scanner.nextInt(); // количество точек
-        int[] a = new int[n * 2]; // массив координат отрезков
-        for (int i = 0; i < n * 2; i++) {
+        int[] a = new int[n]; // массив координат начала отрезков
+        int[] b = new int[n]; // массив координат концов отрезков
+        for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();
+            b[i] = scanner.nextInt();
         }
         int[] p = new int[m]; // массив точек
         for (int j = 0; j < m; j++) {
             p[j] = scanner.nextInt();
         }
-        System.out.println(Arrays.toString(a));
+
         quickSort(a, 0, a.length - 1);
-        System.out.println(Arrays.toString(a));
+        int x = 0;
+        quickSort(b, 0, b.length - 1);
+        int y = 0;
+
+        for (int i = 0; i < p.length; i++) {
+            x = binarySearchLow(a, p[i]);
+            y = binarySearchHigh(b, p[i]);
+            System.out.print((x - y) + " ");
+        }
     }
 
     public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
+        //long startTime = System.currentTimeMillis();
         new Main().run();
-        long finishTime = System.currentTimeMillis();
-        System.out.println(finishTime - startTime + " ms");
+        //long finishTime = System.currentTimeMillis();
+        //System.out.println(finishTime - startTime + " ms");
     }
 }
