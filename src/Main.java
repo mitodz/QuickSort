@@ -2,43 +2,33 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-
     public static int binarySearchHigh(int[] a, int k) {
-        int l = 1; //левая граница поиска нужного числа
-        int r = a.length; //правая граница поиска нужного числа
-        int m; //номер индекса согласно алгоритма "разделяй и властвуй"
-        while (l <= r) {
-            m = l + (r - l) / 2;
-            if (m < 1) m = 0;
-            if (a[m - 1] < k && m < a.length && a[m] > k) {
-                return m;
-            } else if (a[m - 1] > k) {
-                r = m - 1;
+        int l = -1; //фиктивная левая граница поиска нужного числа
+        int r = a.length; //фиктивная правая граница поиска нужного числа
+        while (r > l + 1) {
+            int m = l + ((r - l) >> 1); //номер индекса согласно алгоритма "разделяй и властвуй"
+            if (a[m] >= k) {
+                r = m;
             } else {
-                l = m + 1;
+                l = m;
             }
         }
-        return 0;
+        return r;
     }
 
     public static int binarySearchLow(int[] a, int k) {
-        int l = 1; //левая граница поиска нужного числа
-        int r = a.length; //правая граница поиска нужного числа
-        int m; //номер индекса согласно алгоритма "разделяй и властвуй"
-        while (l <= r) {
-            m = l + (r - l) / 2;
-            if (m < 1) m = 0;
-            if (a[m - 1] <= k && m < a.length && a[m] > k) {
-                return m;
-            } else if (a[m - 1] > k) {
-                r = m - 1;
+        int l = -1; //фиктивная левая граница поиска нужного числа
+        int r = a.length; //фиктивная правая граница поиска нужного числа
+        while (r > l + 1) {
+            int m = l + ((r - l) >> 1); //номер индекса согласно алгоритма "разделяй и властвуй"
+            if (a[m] <= k) {
+                l = m;
             } else {
-                l = m + 1;
+                r = m;
             }
         }
-        return 0;
+            return l + 1;
     }
-
 
     public int partition(int[] a, int l, int r) {
         Random rnd = new Random();
@@ -78,7 +68,7 @@ public class Main {
     }
 
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); //Ответ 2 3 6 3 2 1
         int n = scanner.nextInt(); // количество отрезков
         int m = scanner.nextInt(); // количество точек
         int[] a = new int[n]; // массив координат начала отрезков
