@@ -2,6 +2,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
+    public static void swap(int a, int b) {
+        int buf = a;
+        a = b;
+        b = buf;
+    }
+
     public static int binarySearchHigh(int[] a, int k) {
         int l = -1; //фиктивная левая граница поиска нужного числа
         int r = a.length; //фиктивная правая граница поиска нужного числа
@@ -33,27 +40,20 @@ public class Main {
     public int partition(int[] a, int l, int r) {
         Random rnd = new Random();
         int y = rnd.nextInt(r + 1 - l) + l;//случайный разделитель
-        int buf = a[l];
-        int x = a[l] = a[y];
-        a[y] = buf;
+        swap(a[l], a[y]);
+        int x = a[l];
         int j = l;
         for (int i = l + 1; i <= r; i++) {
             if (a[i] < x) {
                 j++;
-                int buff = a[i];
-                a[i] = a[j];
-                a[j] = buff;
+                swap (a[i], a[j]);
             }
             if (a[i] == x) {
-                int buff = a[i];
-                a[i] = a[j];
-                a[j] = buff;
+                swap (a[i], a[j]);
                 j++;
             }
         }
-        buf = a[j];
-        a[j] = a[l];
-        a[l] = buf;
+        swap (a[l], a[j]);
         return j;
     }
 
